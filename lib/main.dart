@@ -70,10 +70,6 @@ main(List<String> args) async {
 
   await initFluent(args);
 
-  if (Platform.isAndroid || Platform.isIOS) {
-    await configSecureWindow(userSetting.secureWindow);
-  }
-
   runApp(ProviderScope(
     child: MyApp(arguments: args),
   ));
@@ -129,6 +125,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     fetcher.start();
     super.initState();
     if (Platform.isIOS) WidgetsBinding.instance.addObserver(this);
+
+    if (Platform.isAndroid || Platform.isIOS) {
+      configSecureWindow(userSetting.secureWindow);
+    }
 
     Future.delayed(Duration.zero, () {
       SingleInstancePlugin.argsParser(widget.arguments);
