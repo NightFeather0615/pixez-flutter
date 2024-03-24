@@ -126,10 +126,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     super.initState();
     if (Platform.isIOS) WidgetsBinding.instance.addObserver(this);
 
-    if (Platform.isAndroid || Platform.isIOS) {
-      configSecureWindow(userSetting.secureWindow);
-    }
-
     Future.delayed(Duration.zero, () {
       SingleInstancePlugin.argsParser(widget.arguments);
     });
