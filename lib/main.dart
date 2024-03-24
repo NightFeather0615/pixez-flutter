@@ -40,6 +40,7 @@ import 'package:pixez/store/save_store.dart';
 import 'package:pixez/store/tag_history_store.dart';
 import 'package:pixez/store/top_store.dart';
 import 'package:pixez/store/user_setting.dart';
+import 'package:pixez/utils.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 final RouteObserver<ModalRoute<void>> routeObserver =
@@ -68,6 +69,10 @@ main(List<String> args) async {
   }
 
   await initFluent(args);
+
+  if (Platform.isAndroid || Platform.isIOS) {
+    await configSecureWindow(userSetting.secureWindow);
+  }
 
   runApp(ProviderScope(
     child: MyApp(arguments: args),
